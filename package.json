@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Repo for basic common tooling neede for any javascript project",
   "main": "index.js",
+ 
   "scripts": {
     "prettier": "./node_modules/.bin/prettier --check '**/*.{js,json,ts,yml,yaml}'",
     "prettier:write": "./node_modules/.bin/prettier --write \"**/*.{js,json,ts,yml,yaml}\"",
@@ -37,5 +38,10 @@
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
