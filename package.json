@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "description": "Repo for basic common tooling neede for any javascript project",
   "main": "index.js",
+  "engines": {
+    "node": "14.x || 16.x",
+    "npm": ">= 6.9.x"
+  },
+  "devEngines": {
+    "node": "14.x || 16.x",
+    "npm": ">= 6.9.x"
+  },
  
   "scripts": {
     "prettier": "./node_modules/.bin/prettier --check '**/*.{js,json,ts,yml,yaml}'",
@@ -10,8 +18,15 @@
     "check-engines": "./node_modules/fbjs-scripts/node/check-dev-engines.js package.json",
     "lint": "eslint '{src,apps,libs,test}/**/*ts' --fix --quiet",
     "prepare": "husky install",
-    "build": "pnpm -r build",
-    "test": "pnpm -r test"
+    "build": "tsc -p tsconfig.build.json",
+    "prebuild":"npm run check-engines && npm run clean",
+    "clean": "rimraf build && rimraf coverage",
+    "test": "npm run test:ci",
+    "test:ci":"NODE_ENV=CI jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "author": "",
   "license": "ISC",
